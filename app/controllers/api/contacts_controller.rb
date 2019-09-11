@@ -1,7 +1,16 @@
 class Api::ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
-    render 'index.json.jb'
+    if current_user
+      @contacts = current_user.contacts
+      if params[:search]
+       @contacts = @contacts.where("first_name iLIKE ? OR last_name iLIKE ? OR middle_name iLIKE ? OR email iLIKE ? OR bio iLIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+     end
+     @contacts = @contacts.order(:id)
+     render 'index.json.jb'
+    else 
+      render json: [message: "failed"]
+
+    end
   end
   def show
   @contact = Contact.find_by(id: params[:id])
@@ -11,14 +20,24 @@ class Api::ContactsController < ApplicationController
    @contact = Contact.create({
     first_name: params[:first_name],
     last_name: params[:last_name], 
+    middle_name: params[:middle_name],
+    bio: params[:bio],
     email: params[:email],
-    phone_number: params[:phone_number]})
-   render 'create.json.jb'
+    phone_number: params[:phone_number],
+    user_id: current_user.id})
+    if @contact.save
+      render 'create.json.jb'
+    else 
+      render json: {errors: @contact.errors.full_messages},
+      status: :unprocessable_entity
+    end
   end
   def update
     @contact = Contact.find_by(id: params[:id])
     @contact.first_name = params[:first_name] || @contact.first_name
     @contact.last_name = params[:last_name] || @contact.last_name
+    @contact.middle_name = params[:middle_name] || @contact.middle_name
+    @contact.bio = params[:bio] || @contact.bio
     @contact.email = params[:email] || @contact.email
     @contact.phone_number = params[:phone_number] || @contact.phone_number
     @contact.save
