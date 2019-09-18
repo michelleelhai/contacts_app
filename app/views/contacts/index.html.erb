@@ -1,0 +1,8 @@
+<h1>THE CONTACT PAGE MAH HOE</h1>
+<%@contacts.each do |contact|%>
+  <h2><%=contact.first_name%></h2>
+  <h2><%=contact.last_name%></h2>
+  <h2><%=contact.email%></h2>
+  <h2><%=contact.phone_number%></h2>
+  <a href="/contacts/<%=contact.id%>">More info</a>
+<%end%>

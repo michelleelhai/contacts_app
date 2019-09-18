@@ -5,7 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-contact = Contact.new({first_name: "Luna", last_name: "Elhai", email: "luna@gmail.com", phone_number:"8989897654"})
-contact.save
-contact = Contact.new({first_name:"Kellie", last_name:"Elhai", email:"kellie@gmail.com", phone_number: "8056789453"})
-contact.
+ContactGroup.create({group_id: 1, contact_id: 3})
+ContactGroup.create({group_id: 2, contact_id: 5})
+ContactGroup.create({group_id: 2, contact_id: 9})
+ContactGroup.create({group_id: 1, contact_id: 6})
+ContactGroup.create({group_id: 1, contact_id: 2})
+ContactGroup.create({group_id: 2, contact_id: 7})
+ContactGroup.create({group_id: 1, contact_id: 1})
+

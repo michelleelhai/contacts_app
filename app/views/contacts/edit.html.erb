@@ -1,0 +1,26 @@
+<h1>edit product</h1>
+<form action="/contacts/<%=@contact.id%>" method="post">
+<div>
+  first_name <input type="text" name="first_name" value="<%=@contact.first_name%>">
+</div>
+<div>
+  last_name <input type="text" name="last_name" value="<%=@contact.last_name%>">
+</div>
+<div>
+  email <input type="text" name="email" value="<%=@contact.email%>">
+</div>
+<div>
+  phone_number <input type="text" name="phone_number" value="<%=@contact.phone_number%>">
+</div>
+<div>
+  middle_name <input type="text" name="middle_name" value="<%=@contact.middle_name%>">
+</div>
+<div>
+  bio <input type="text" name="bio" value="<%=@contact.bio%>">
+</div>
+<div>
+  user_id <input type="number" name="user_id" value="<%=@contact.user_id%>">
+</div>
+<input type="submit" value="create product">
+</form>
+
